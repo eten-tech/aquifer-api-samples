@@ -1,50 +1,31 @@
-# React + TypeScript + Vite
+# Aquifer API Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This small app shows how easy it is to get started with the Aquifer API.
 
-Currently, two official plugins are available:
+There are two components to it:
+1. Backend API proxy
+2. Frontend React client
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Notes on backend API proxy
 
-## Expanding the ESLint configuration
+The backend proxy will forward all requests to the Aquifer API, injecting the API key configured in your environment. This proxy demonstrates the intended usage of the API, as a server-to-server call, rather than a client-to-server call. In other words, an Aquifer API key is meant to only be visible on your backend and shouldn't be shipped with the client. The Aquifer API's restrictive CORS policy ensures this.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Install dependencies
 
-- Configure the top-level `parserOptions` property like this:
+`pushd backend && yarn install && popd`
+`pushd frontend && yarn install && popd`
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Setup your environment
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+`cp backend/.env.template backend/.env`
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Open `backend/.env` and set your Aquifer API key.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Run
+
+`cd backend && yarn dev`
+`cd frontend && yarn dev`
+
+## Open in browser
+
+Navigate to `http://localhost:5173` in your browser.
