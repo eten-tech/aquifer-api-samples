@@ -13,6 +13,7 @@ The backend proxy will forward all requests to the Aquifer API, injecting the AP
 ## Install dependencies
 
 `pushd backend && yarn install && popd`
+
 `pushd frontend && yarn install && popd`
 
 ## Setup your environment
@@ -24,6 +25,7 @@ Open `backend/.env` and set your Aquifer API key.
 ## Run
 
 `cd backend && yarn dev`
+
 `cd frontend && yarn dev`
 
 ## Open in browser
