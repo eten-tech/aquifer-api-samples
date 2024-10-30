@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "format": "prettier --no-error-on-unmatched-pattern -w *.{ts,js,json,jsx,tsx} src/**/*.{ts,js,json,jsx,tsx}"
+    "format": "prettier --no-error-on-unmatched-pattern -w *.{ts,js,json,jsx,tsx} src/*.{ts,js,json,jsx,tsx} src/**/*.{ts,js,json,jsx,tsx}"
   },
   "dependencies": {
     "jszip": "^3.10.1",

@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "wouter";
-import { fetchFromApi } from "./utils";
 import {
   ImageContent,
   MediaType,
   ResourceDetails,
   TextContent,
   VideoContent,
-} from "./types/api";
-import useAudioHandler from "./useAudioHandler";
+  fetchFromApi,
+} from "../api";
+import useAudioHandler from "../hooks/useAudioHandler";
 
 function Resource() {
   const params = useParams();
@@ -22,9 +22,21 @@ function Resource() {
     resource,
   );
 
+  const fetchResource = useCallback(async () => {
+    if (resourceId) {
+      setIsFetchingResource(true);
+      const resource = await fetchFromApi(`/resources/:id`, {
+        contentTextType: "html",
+        id: resourceId,
+      });
+      setResource(resource);
+      setIsFetchingResource(false);
+    }
+  }, [resourceId]);
+
   useEffect(() => {
     fetchResource();
-  }, []);
+  }, [fetchResource]);
 
   if (!resourceId) {
     return (
@@ -42,25 +54,8 @@ function Resource() {
     );
   }
 
-  async function fetchResource() {
-    if (resourceId) {
-      setIsFetchingResource(true);
-      const stuff = await fetchFromApi<ResourceDetails>(
-        `/resources/${resourceId}`,
-        { contentTextType: "html" },
-      );
-      setResource(stuff);
-      setIsFetchingResource(false);
-    }
-  }
-
   if (isFetchingResource || audioIsLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full space-y-4">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-        <p className="text-center text-gray-600">Loading resource...</p>
-      </div>
-    );
+    return <Loader />;
   }
 
   if (!resource) {
@@ -90,12 +85,12 @@ function Resource() {
         </Link>
       </div>
       <h1 className="text-3xl font-bold mb-6 text-center">{resource.name}</h1>
-      <div className="w-full">
+      <div className="w-full h-full overflow-y-auto">
         {(() => {
           switch (mediaType) {
             case "Text":
               return (
-                <div className="prose overflow-y-auto">
+                <div className="prose">
                   {(resource.content as TextContent).map((content, index) => (
                     <div key={index}>
                       <div dangerouslySetInnerHTML={{ __html: content }} />
@@ -108,21 +103,18 @@ function Resource() {
               );
             case "Image":
               return (
-                <img
+                <ImageWithLoader
                   src={(resource.content as ImageContent).url}
                   alt={resource.name}
-                  className="max-w-full h-auto"
+                  className="w-full max-w-full h-auto"
                 />
               );
             case "Video":
               return (
-                <video controls className="max-w-full">
-                  <source
-                    src={(resource.content as VideoContent).url}
-                    type="video/mp4"
-                  />
-                  Your browser does not support the video tag.
-                </video>
+                <VideoWithLoader
+                  src={(resource.content as VideoContent).url}
+                  className="w-full max-w-full"
+                />
               );
             case "Audio":
               return audioUrls.map((url, index) => (
@@ -136,6 +128,63 @@ function Resource() {
           }
         })()}
       </div>
+    </>
+  );
+}
+
+function Loader() {
+  return (
+    <div className="flex flex-col items-center justify-center h-full space-y-4">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      <p className="text-center text-gray-600">Loading resource...</p>
+    </div>
+  );
+}
+
+function ImageWithLoader({
+  src,
+  alt,
+  className = "",
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <>
+      {isLoading && <Loader />}
+      <img
+        src={src}
+        alt={alt}
+        onLoad={() => setIsLoading(false)}
+        className={`${className} ${isLoading ? "hidden" : ""}`}
+      />
+    </>
+  );
+}
+
+function VideoWithLoader({
+  src,
+  className = "",
+}: {
+  src: string;
+  className?: string;
+}) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <>
+      {isLoading && <Loader />}
+      <video
+        controls
+        onLoadedData={() => setIsLoading(false)}
+        className={`${className} ${isLoading ? "hidden" : ""}`}
+      >
+        <source src={src} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </>
   );
 }
