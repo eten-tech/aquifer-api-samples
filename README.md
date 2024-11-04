@@ -1,33 +1,9 @@
-# Aquifer API Demo
+﻿# Aquifer API Samples
 
-This small app shows how easy it is to get started with the Aquifer API.
+This repo contain example projects that use the Aquifer API to populate data. These samples may have videos available that walk through the code (listed below and in the documentation).
 
-There are two components to it:
-1. Backend API proxy
-2. Frontend React client
+The API documentation can be found at [https://api.aquifer.bible/docs](https://api.aquifer.bible/docs). The following videos are available to help users new to REST APIs get started:
 
-## Notes on backend API proxy
+[Understanding the documentation](https://cdn.aquifer.bible/training/aquifer-api-documentation.mp4)
 
-The backend proxy will forward all requests to the Aquifer API, injecting the API key configured in your environment. This proxy demonstrates the intended usage of the API, as a server-to-server call, rather than a client-to-server call. In other words, an Aquifer API key is meant to only be visible on your backend and shouldn't be shipped with the client. The Aquifer API's restrictive CORS policy ensures this.
-
-## Install dependencies
-
-`pushd backend && yarn install && popd`
-
-`pushd frontend && yarn install && popd`
-
-## Setup your environment
-
-`cp backend/.env.template backend/.env`
-
-Open `backend/.env` and set your Aquifer API key.
-
-## Run
-
-`cd backend && yarn dev`
-
-`cd frontend && yarn dev`
-
-## Open in browser
-
-Navigate to `http://localhost:5173` in your browser.
+[Making requests with Postman](https://cdn.aquifer.bible/training/aquifer-api-postman.mp4)
