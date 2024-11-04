@@ -1,4 +1,4 @@
-# Aquifer API Demo
+# Webpage Search With React
 
 This small app shows how easy it is to get started with the Aquifer API.
 
