@@ -509,7 +509,7 @@ At position 0 is the first block of regular text. Position 1 then has the first 
     "text":"Psalm 33:6"
 }
 ```
-Note that the `type` is still "text", but there is now an additional `mark` property representing the additional extension to the text. The `text` property itself works as everything else. That is the text content. But the "Psalm 33:6" text has a mark on it. The type of the mark is "bibleReference" and the attributes of the mark is a verses array. Each verse has a `startVerse` and an `endVerse` property. Thus, to parse what a mark is, one must look at the `type` and then parse `attrs` accordingly if relevant.
+Note that the `type` is still "text", but there is now an additional `mark` property representing the additional extension to the text. The `text` property itself works as everything else. That is the text content. But the "Psalm 33:6" text has a mark on it. The type of the mark is "bibleReference" and the attributes of the mark is a verses array. Each verse has a `startVerse` and an `endVerse` property (which use common English Bible verse numbering). Thus, to parse what a mark is, one must look at the `type` and then parse `attrs` accordingly if relevant.
 
 Further down the `content` array is a mark on the word "beginning" indicating that it is bolded.
 ```json
