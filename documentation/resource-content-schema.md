@@ -487,7 +487,7 @@ Next is a "paragraph" node. Most text content will be part of a paragraph. Parag
 }
 ```
 
-As with the heading, the paragraph has an `attr` object with a `dir` property. Typically, the reading direction will be the same for all content in a single resource as its tied to the language. Also like the heading, the `content` is an array of `type` and `text`. However, here some parts of the content have different marks. If there were no marks, then the `content` length would be 1.
+As with the heading, the paragraph has an `attr` object with a `dir` property. Typically, the reading direction will be the same for all content in a single resource as it's tied to the language. Also like the heading, the `content` is an array of `type` and `text`. However, here some parts of the content have different marks. If there were no marks, then the `content` length would be 1.
 
 At position 0 is the first block of regular text. Position 1 then has the first mark:
 ```json
