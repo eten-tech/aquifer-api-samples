@@ -6,6 +6,8 @@ There are two components to it:
 1. Backend API proxy
 2. Frontend React client
 
+[Demo video](https://cdn.aquifer.bible/training/webpage-search-with-react-demo.mp4)
+
 ## Notes on backend API proxy
 
 The backend proxy will forward all requests to the Aquifer API, injecting the API key configured in your environment. This proxy demonstrates the intended usage of the API, as a server-to-server call, rather than a client-to-server call. In other words, an Aquifer API key is meant to only be visible on your backend and shouldn't be shipped with the client. The Aquifer API's restrictive CORS policy ensures this.
