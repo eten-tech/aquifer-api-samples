@@ -568,7 +568,7 @@ As mentioned, the example here covers typical scenarios. A simple typescript str
 interface ContentNode {
     type: string;
     text?: string;
-    marks?: MarkType[];
+    marks?: Mark[];
     content?: ContentNode[];
     attrs?: {
         level?: number;
