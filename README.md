@@ -9,3 +9,5 @@ The API documentation can be found at [https://api.aquifer.bible/docs](https://a
 [Making requests with Postman](https://cdn.aquifer.bible/training/aquifer-api-postman.mp4)
 
 [Downloading resources to the file system with C#](https://cdn.aquifer.bible/training/aquifer-api-files-demo-csharp.mp4)
+
+[Why use a web API instead of flat files?](https://cdn.aquifer.bible/training/api-and-flat-files.mp4)
