@@ -10,11 +10,11 @@ The generated source code uses [Kiota](https://learn.microsoft.com/en-us/openapi
 - `dotnet add package Microsoft.Kiota.Bundle`
 
 The following is a full example of a `Program.cs` file using the generated client and injecting an API key header.
-The example code assumes that the downloaded client code files are contained in the same solution in the `BiblioNexus.Aquifer.API.Client` namespace.
+The example code assumes that the downloaded client code files are contained in the same solution in the `Aquifer.API.Client` namespace.
 
 ```csharp
 using System.Net.Http;
-using BiblioNexus.Aquifer.API.Client;
+using Aquifer.API.Client;
 using Microsoft.Kiota.Abstractions.Authentication;
 using Microsoft.Kiota.Http.HttpClientLibrary;
 
